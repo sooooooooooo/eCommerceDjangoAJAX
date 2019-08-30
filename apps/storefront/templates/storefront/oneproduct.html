@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A-Commerce | Better than E-Commerce</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom styles for this ecommerce template -->
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300" rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'storefront/css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'storefront/css/album.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'storefront/css/productdetail.css' %}">
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
+</head>
+<body>
+	<header class="site-navbar" role="banner">
+		<div class="site-navbar-top">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+						<form action="" class="site-block-top-search">
+							<i class="icon material-icons">search</i>
+							<input type="text" class="form-control border-0" placeholder="Search" name="">
+						</form>
+					</div>
+					<div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+						<div class="site-logo">
+							<a href="/" class="js-logo-clone">A-Commerce</a>
+						</div>
+					</div>
+					<div class="col-6 col-md-4 order-3 order-md-3 text-right">
+						<div class="site-top-icons">
+							<ul>
+								<li>
+									{% if not request.session.customer_id %}
+									<a href="/login" data-toggle="tooltip" title="Sign in | Register">
+										<i class="icon material-icons">account_circle</i>
+									</a>
+									{% endif %}
+									{% if request.session.customer_id %}
+									<span class="align-text-bottom">Hi {{ request.session.customer_fname }}!</span>
+									<a href="/logout" class="align-text-bottom">Log out</a>
+									{% endif %}
+								</li>
+								<li>
+									<a href="/carts" class="site-cart">
+										<i class="icon material-icons">shopping_cart</i>
+										<span class="count">2</span>
+									</a>
+								</li>
+								<li class="d-inline-block d-md-none ml-md-0">
+									<a href="#" class="site-menu-toggle js-menu-toggle">
+										<i class="icon material-icons">menu</i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav class="site-navigation text-right text-md-center" role="navigation">
+			<div class="container">
+				<ul class="site-menu js-clone-nav d-none d-md-block p-0">
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li class="active">
+						<a href="/products">Shop</a>
+					</li>
+					<li>
+						<a href="#">New Arrivals</a>
+					</li>
+					<li>
+						<a href="#">Sale</a>
+					</li>
+					<li>
+						<a href="#">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<!-- CATALOG -->
+	<div class="bg-light py-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 mb-0">
+					<a href="/">Home</a>
+					<span class="mx-2 mb-0">/ </span>
+					<a href="/products">Shop</a>
+					<span class="mx-2 mb-0">/ </span>
+					<strong class="text-black">Skeleton Peace Tshirt - Black</strong>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<main role="main">
+		<div class="container">
+			<!-- PRODUCT ITEM -->
+			<div class="row mt-5">
+				<div class="col-md-6">
+					<div class="pro-img-details">
+						<img class="img-fluid" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+						<div class="pro-img-list d-flex justify-content-between">
+							<a href="#">
+								<img src="../images/thumbnail-1.jpg" alt="">
+							</a>
+							<a href="#">
+								<img src="../images/thumbnail-1.jpg" alt="">
+							</a>
+							<a href="#">
+								<img src="../images/thumbnail-1.jpg" alt="">
+							</a>
+							<a href="#">
+								<img src="../images/thumbnail-1.jpg" alt="">
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<h4 class="pro-d-title">Skeleton Peace Tshirt - Black</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+					<div class="product_meta">
+						<span class="posted_in"> <strong>Categories:</strong> <a rel="tag" href="#">Jackets</a>, <a rel="tag" href="#">Men</a>, <a rel="tag" href="#">Shirts</a>, <a rel="tag" href="#">T-shirt</a>.</span>
+						<span class="tagged_as"><strong>Tags:</strong> <a rel="tag" href="#">mens</a>, <a rel="tag" href="#">womens</a>.</span>
+					</div>
+					<div class="m-bot15"> <strong>Price : </strong> <span class="amount-old">$544</span>  <span class="pro-price"> $300.00</span></div>
+					<form>
+						<div class="form-group">
+							<label>Quantity</label>
+							<input type="quantiy" placeholder="1" class="form-control quantity" name="qty">
+						</div>
+						<input type="hidden" name="">
+						<p>
+							<button class="btn btn-round btn-primary" type="button"><i class="material-icons">add_shopping_cart</i> Add to Cart</button>
+						</p>
+					</form>
+				</div>
+			</div>
+
+			<!-- CUSTOMER REVIEWS -->
+			<h4 class="my-4">Customer Reviews</h4>
+			<div class="row mt-5">
+				<div class="col-md-12">
+					<h5>Monty Python</h5>
+					<p class="mb-0"><strong>Ratings: 5</strong></p>
+					<p class="mb-3"><strong>Jan 7, 2019</strong></p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</div>
+			</div>
+			<hr>
+			<div class="row mt-5">
+				<div class="col-md-12">
+					<h4>Add a review</h4>
+					<form>
+						<div class="form-group">
+							<label for="selectRating">Overall rating</label>
+							<select class="form-control" id="selectRating">
+								<option selected disabled>Choose...</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="textareaReview">Write your review</label>
+							<textarea class="form-control" id="textareaReview" rows="3"></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary float-right">Submit</button>
+					</form>
+				</div>
+			</div>
+			<hr class="mb-5">
+
+			<!-- FREQUENTLY BOUGHT TOGETHER -->
+			<h4 class="my-4">Frequently bought together</h4>
+			<div class="row mt-5">
+				<div class="col-md-3">
+					<div class="card mb-4 box-shadow">
+						<a href="oneproduct.html" class="text-black">
+			                <img class="card-img-top" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="Card image cap">
+			                <div class="text-center card-body">
+			                  	<p class="card-text">Skeleton Peace Tshirt - Black</p>
+								<h5 class="text-black">$19.99</h5>
+			                </div>
+						</a>
+		            </div>
+				</div>
+			</div>
+
+			<!-- RELATED PRODUCTS -->
+			<h4 class="my-4">Similar Items</h4>
+			<div class="row mt-5">
+				<div class="col-md-3">
+					<div class="card mb-4 box-shadow">
+						<a href="oneproduct.html" class="text-black">
+			                <img class="card-img-top" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="Card image cap">
+			                <div class="text-center card-body">
+			                  	<p class="card-text">Skeleton Peace Tshirt - Black</p>
+								<h5 class="text-black">$19.99</h5>
+			                </div>
+						</a>
+		            </div>
+				</div>
+				<div class="col-md-3">
+					<div class="card mb-4 box-shadow">
+						<a href="oneproduct.html" class="text-black">
+			                <img class="card-img-top" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="Card image cap">
+			                <div class="text-center card-body">
+			                  	<p class="card-text">Skeleton Peace Tshirt - Black</p>
+								<h5 class="text-black">$19.99</h5>
+			                </div>
+						</a>
+		            </div>
+				</div>
+				<div class="col-md-3">
+					<div class="card mb-4 box-shadow">
+						<a href="oneproduct.html" class="text-black">
+			                <img class="card-img-top" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="Card image cap">
+			                <div class="text-center card-body">
+			                  	<p class="card-text">Skeleton Peace Tshirt - Black</p>
+								<h5 class="text-black">$19.99</h5>
+			                </div>
+						</a>
+		            </div>
+				</div>
+				<div class="col-md-3">
+					<div class="card mb-4 box-shadow">
+						<a href="oneproduct.html" class="text-black">
+			                <img class="card-img-top" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="Card image cap">
+			                <div class="text-center card-body">
+			                  	<p class="card-text">Skeleton Peace Tshirt - Black</p>
+								<h5 class="text-black">$19.99</h5>
+			                </div>
+						</a>
+		            </div>
+				</div>
+			</div>
+		</div>
+
+        <!-- FOOTER -->
+		<footer class="container">
+			<p class="float-right"><a href="#">Back to top</a></p>
+			<p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+		</footer>
+	</main>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Backoffice - ACommerce</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
+    <!-- Custom styles for this blog template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'login_reg_app/css/blog.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login_reg_app/css/style.css' %}">
+	{% load tz %}
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" id="favoritebooksNav">
+		<span class="navbar-brand mb-0 h1">A-Commerce Backoffice</span>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		    	<li class="nav-item">
+		        	<a class="nav-link" href="/adminportal">Home</a>
+		      	</li>
+		    </ul>
+		</div>
+		<span class="navbar-text h6">
+			<a href="/adminportal" class="badge badge-primary text-white">Sign in</a>
+		</span>
+	</nav>
+	<div class="container mt-5">
+		<!-- <h1 class="text-center">Belt Exam - Django</h1> -->
+		<div class="col-md-6 mt-5">
+			<div class="mr-5 pr-5 mb-5">
+				<h3 class="mb-5">Register</h3>
+				<div>
+					{% if messages %}
+					<ul class="messages col-md-12" style="list-style-position: inside; display: inline-block;">
+					    {% for message in messages %}
+					    <li{% if message.tags %} class="{{ message.tags }} text-danger text-left"{% endif %}>{{ message }}</li>
+					    {% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+				<form action="/adminportal/register" method="post" id="regForm">
+					{% csrf_token %}
+					<div class="form-group">
+						<label for="inputFname">First name:</label>
+						<input type="text" class="form-control" id="inputFname" name="fname" value="{{ request.session.fname }}">
+					</div>
+					<div class="form-group">
+						<label for="inputLname">Last name:</label>
+						<input type="text" class="form-control" id="inputLname" name="lname" value="{{ request.session.lname }}">
+					</div>
+					<div class="form-group">
+						<label for="inputEmail">Email:</label>
+						<input type="text" class="form-control" id="inputEmail" name="email" value="{{ request.session.email }}">
+					</div>
+					<div class="form-group">
+						<label for="inputAlias">Alias:</label>
+						<input type="text" class="form-control" id="inputAlias" name="alias" value="{{ request.session.alias }}">
+					</div>
+					<div class="form-group">
+						<label for="inputDOB">Date of birth:</label>
+						<input class="form-control" id="inputDOB" type="date" name="dob" value="{{ request.session.dob }}">
+					</div>
+					<div class="form-group">
+						<label for="inputPassword">Password:</label>
+						<input type="password" class="form-control" id="inputPassword" name="password">
+						<small class="form-text text-muted">
+							Password must have a minimum length of 8, at least one uppercase letter, at least one lowercase letter, at least one number, at least one special character
+						</small>
+					</div>
+					<div class="form-group">
+						<label for="inputConfirmpassword">Confirm password:</label>
+						<input type="password" class="form-control" id="inputConfirmpassword" name="confirmpassword">
+					</div>
+					<button type="submit" class="btn btn-primary">Register!</button>
+				</form>					
+			</div>
+		</div>
+		<div class="col-md-6 mt-5 mb-5">
+			<a href="/adminportal">Already have an account? Login</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/*ul>li>a:hover i{
+display:block !important;
+float:right !important;
+}
+ul>li>a>i{
+display:none !important;
+}
+.glyphicon-edit{
+padding-left:7%;
+}*/
+
+div#nSelect li a {
+	width: 50%;
+	display: inline;
+	vertical-align: top;
+}

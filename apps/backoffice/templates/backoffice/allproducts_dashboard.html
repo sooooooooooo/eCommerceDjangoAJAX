@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/blog/">
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
+    <!-- UPLOAD IMAGE -->
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'backoffice/css/uploadimage.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'backoffice/css/icon.css' %}">
+	<script src="{% static 'backoffice/js/uploadimage.js' %}"></script>
+	<script src="{% static 'backoffice/js/icon.js' %}"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" id="favoritebooksNav">
+		<a href="/dashboard" class="navbar-brand mb-0 h1">Dashboard</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		    	<li class="nav-item">
+		        	<a class="nav-link" href="/dashboard/orders">Orders</a>
+		      	</li>
+		      	<li class="nav-item active">
+		        	<a class="nav-link" href="/dashboard/products">Products <span class="sr-only">(current)</span></a>
+		      	</li>
+		    </ul>
+		</div>
+		<span class="navbar-text h6">
+			Welcome, {{ request.session.fname }}!
+			&nbsp&nbsp
+			<a href="/adminportal/logout" class="badge badge-primary text-white">Log off</a>
+		</span>
+	</nav>
+
+	<main role="main" class="container mt-5">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-md-12 mb-5">
+					<div class="float-md-left mb-4">
+						<form class="form-inline d-flex align-items-center">
+							<input type="text" class="form-control mb-2 mr-sm-2 col-md-9" placeholder="Search" name="">
+							<button type="submit" class="btn mb-2 col-md-2 text-center"><i class="icon material-icons">search</i></button>
+						</form>
+					</div>
+					<div class="d-flex">
+						<div class="mr-1 ml-md-auto">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewProModal">
+								Add new product
+							</button>
+
+							<!-- Modal - Add New Product -->
+							<div class="modal fade" id="addNewProModal" tabindex="-1" role="dialog" aria-labelledby="addNewProModalTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="addNewProModalLongTitle">Add a new product</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form action="/products/create" method="post" enctype="multipart/form-data">
+												{% csrf_token %}
+												<div class="form-group row">
+													<label for="inputProName" class="col-sm-4 col-form-label">Name:</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" id="inputProName" name="pname">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="textareaDesc" class="col-sm-4 col-form-label">Description:</label>
+													<div class="col-sm-8">
+														<textarea class="form-control" id="textareaDesc" rows="3" name="pdescription"></textarea>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputProPrice" class="col-sm-4 col-form-label">Price:</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" id="inputProPrice" name="pprice">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="addNewProCatSelect" class="col-sm-4 col-form-label">Categories:</label>
+													<div class="col-sm-8" id="nSelect">
+														<select class="form-control selectpicker categorySelect" id="addNewProCatSelect" name="pcategory" autocomplete="off" tabindex="-1">
+															<option selected disabled>Choose...</option>
+															<option value="Wigs">Wigs</option>
+															<option value="Tacos">Tacos</option>
+															<option value="Brains">Brains</option>
+															<option value="Capes">Capes</option>
+															<option value="Zoidberg">Zoidberg</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputNewCategory" class="col-sm-4 col-form-label">or add new category:</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" id="inputNewCategory" name="inputcategory">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputInventoryCount" class="col-sm-4 col-form-label">Inventory:</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" id="inputInventoryCount" name="inventory">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputFile" class="col-sm-4 col-form-label">Image:</label>
+													<div class="col-sm-8">
+														<fieldset class="form-group">
+													        <a href="javascript:void(0)" onclick="$('#pro-image').click()" class="btn btn-secondary">Upload Image</a>
+													        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+													    </fieldset>
+													    <div class="preview-images-zone">
+													        <div class="preview-image preview-show-1">
+													            <div class="image-cancel" data-no="1">x</div>
+													            <div class="image-zone"><img id="pro-img-1" src="https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA5Ny85NTkvb3JpZ2luYWwvc2h1dHRlcnN0b2NrXzYzOTcxNjY1LmpwZw=="></div>
+													            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="1" class="btn btn-light btn-edit-image">edit</a></div>
+													        </div>
+													        <div class="preview-image preview-show-2">
+													            <div class="image-cancel" data-no="2">x</div>
+													            <div class="image-zone"><img id="pro-img-2" src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg"></div>
+													            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="2" class="btn btn-light btn-edit-image">edit</a></div>
+													        </div>
+													        <div class="preview-image preview-show-3">
+													            <div class="image-cancel" data-no="3">x</div>
+													            <div class="image-zone"><img id="pro-img-3" src="http://i.stack.imgur.com/WCveg.jpg"></div>
+													            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="3" class="btn btn-light btn-edit-image">edit</a></div>
+													        </div>
+													    </div>
+													</div>
+												</div>
+												<button type="submit" class="btn btn-primary float-right" style="position: relative;">Add product</button>
+											</form>
+										</div>
+
+										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+										<div class="modal-footer border-0" style="position: relative; top: -70px; left: -125px;">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+											<button type="button" class="btn btn-warning">Preview</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% if uploaded_file_url %}
+			<p>File uploaded at: <a href="/media/thumbnail-1.jpg">{{ uploaded_file_url }}</a></p>
+			{% endif %}
+			<div class="row">
+				<table class="table table-striped">
+					<thead class="bg-secondary">
+						<tr>
+							<th scope="col">Picture</th>
+							<th scope="col">Product ID</th>
+							<th scope="col">Name</th>
+							<th scope="col">Description</th>
+							<th scope="col">Price</th>
+							<th scope="col">Inventory Count</th>
+							<th scope="col">Quantity Sold</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<img src="{{ uploaded_file_url }}" alt="product picture">
+							</td>
+							<td>1</td>
+							<td>Bob Ross Wig</td>
+							<td>Very big</td>
+							<td>$19.99</td>
+							<td>123</td>
+							<td>3</td>
+							<td>
+								<a href="#" data-toggle="modal" data-target="#editProModal">edit</a>
+								<a href="#">delete</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- Modal - Edit Product -->
+				<div class="modal fade" id="editProModal" tabindex="-1" role="dialog" aria-labelledby="editProModalTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="editProModalLongTitle">Edit product - ID 1</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="/products/update" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="form-group row">
+										<label for="editInputProName" class="col-sm-4 col-form-label">Name:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="editInputProName" name="pname">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="editTextareaDesc" class="col-sm-4 col-form-label">Description:</label>
+										<div class="col-sm-8">
+											<textarea class="form-control" id="editTextareaDesc" rows="3" name="description"></textarea>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="editInputProPrice" class="col-sm-4 col-form-label">Price:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="editInputProPrice" name="pprice">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="editProCatSelect" class="col-sm-4 col-form-label">Categories:</label>
+										<div class="col-sm-8" id="eSelect">
+											<select class="form-control selectpicker categorySelect" id="editProCatSelect" name="category" autocomplete="off" tabindex="-1">
+												<option selected disabled>Choose...</option>
+												<option value="Wigs">Wigs</option>
+												<option value="Tacos">Tacos</option>
+												<option value="Brains">Brains</option>
+												<option value="Capes">Capes</option>
+												<option value="Zoidberg">Zoidberg</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="editInputNewCategory" class="col-sm-4 col-form-label">or add new category:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="editInputNewCategory" name="inputcategory">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="editInputInventoryCount" class="col-sm-4 col-form-label">Inventory:</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="editInputInventoryCount" name="inventory">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="editInputFile" class="col-sm-4 col-form-label">Image:</label>
+										<div class="col-sm-8">
+											<fieldset class="form-group" id="editInputFile">
+										        <a href="javascript:void(0)" onclick="$('#pro-image').click()" class="btn btn-secondary">Upload Image</a>
+										        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+										    </fieldset>
+										    <div class="preview-images-zone">
+										        <div class="preview-image preview-show-1">
+										            <div class="image-cancel" data-no="1">x</div>
+										            <div class="image-zone"><img id="pro-img-1" src="https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA5Ny85NTkvb3JpZ2luYWwvc2h1dHRlcnN0b2NrXzYzOTcxNjY1LmpwZw=="></div>
+										            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="1" class="btn btn-light btn-edit-image">edit</a></div>
+										        </div>
+										        <div class="preview-image preview-show-2">
+										            <div class="image-cancel" data-no="2">x</div>
+										            <div class="image-zone"><img id="pro-img-2" src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg"></div>
+										            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="2" class="btn btn-light btn-edit-image">edit</a></div>
+										        </div>
+										        <div class="preview-image preview-show-3">
+										            <div class="image-cancel" data-no="3">x</div>
+										            <div class="image-zone"><img id="pro-img-3" src="http://i.stack.imgur.com/WCveg.jpg"></div>
+										            <div class="tools-edit-image"><a href="javascript:void(0)" data-no="3" class="btn btn-light btn-edit-image">edit</a></div>
+										        </div>
+										    </div>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-primary float-right" style="position: relative;">Update</button>
+								</form>
+							</div>
+
+							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+							<div class="modal-footer border-0" style="position: relative; top: -70px; left: -90px;">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-warning">Preview</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- PAGINATION -->
+			<nav aria-label="pagination">
+				<ul class="pagination justify-content-center">
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+						</a>
+					</li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							<span class="sr-only">Next</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+
+
+			<!-- TEST IMAGE UPLOAD -->
+			<form action="/dashboard/test" method="post" enctype="multipart/form-data">
+			    {% csrf_token %}
+			    <input type="file" name="myfile">
+			    <button type="submit">Upload</button>
+			  </form>
+
+			  {% if uploaded_file_url %}
+			    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+			    <img src="{{ uploaded_file_url }}">
+			  {% endif %}
+		</div>
+	</main>
+</body>
+</html>

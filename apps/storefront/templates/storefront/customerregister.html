@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A-Commerce | Better than E-Commerce</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/carousel/">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300" rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'storefront/css/style.css' %}">
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<main role="main">
+		<div class="container mt-5">
+			<div class="col-md-6 mt-5">
+				<div class="mr-5 pr-5 mb-5">
+					<h3 class="mb-5">Register</h3>
+					<div>
+						{% if messages %}
+						<ul class="messages col-md-12" style="list-style-position: inside; display: inline-block;">
+						    {% for message in messages %}
+						    <li{% if message.tags %} class="{{ message.tags }} text-danger text-left"{% endif %}>{{ message }}</li>
+						    {% endfor %}
+						</ul>
+						{% endif %}
+					</div>
+					<form action="/register" method="post" id="regForm">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="inputFname">First name:</label>
+							<input type="text" class="form-control" id="inputFname" name="fname" value="{{ request.session.fname_customer_reg }}">
+						</div>
+						<div class="form-group">
+							<label for="inputLname">Last name:</label>
+							<input type="text" class="form-control" id="inputLname" name="lname" value="{{ request.session.lname_customer_reg }}">
+						</div>
+						<div class="form-group">
+							<label for="inputEmail">Email:</label>
+							<input type="text" class="form-control" id="inputEmail" name="email" value="{{ request.session.email_customer_reg }}">
+						</div>
+						<div class="form-group">
+							<label for="inputPassword">Password:</label>
+							<input type="password" class="form-control" id="inputPassword" name="password">
+							<small class="form-text text-muted">
+								Password must have a minimum length of 8, at least one uppercase letter, at least one lowercase letter, at least one number, at least one special character
+							</small>
+						</div>
+						<div class="form-group">
+							<label for="inputConfirmpassword">Confirm password:</label>
+							<input type="password" class="form-control" id="inputConfirmpassword" name="confirmpassword">
+						</div>
+						<button type="submit" class="btn btn-primary">Register!</button>
+					</form>					
+				</div>
+			</div>
+			<div class="col-md-6 mt-5 mb-5">
+				<a href="/login">Already have an account? Login</a>
+			</div>
+		</div>
+		<hr>
+
+        <!-- FOOTER -->
+		<footer class="container">
+			<p class="float-right"><a href="/">Go back</a></p>
+			<p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+		</footer>
+	</main>
+</body>
+</html>
